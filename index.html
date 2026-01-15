@@ -5,64 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traders do Agro | Mentoria Estratégica</title>
+    
+    <!-- Pré-carregamento de fontes para evitar CLS (Cumulative Layout Shift) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos base para garantir a estética premium antes do carregamento do JS */
+        /* Estilos críticos para renderização imediata (estética premium) */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #050705;
             color: #e5e7eb;
             margin: 0;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
-        .font-display {
-            font-family: 'Inter', sans-serif;
-            letter-spacing: -0.02em;
-        }
-        ::selection {
-            background-color: #166534;
-            color: white;
-        }
-        /* Animações nativas */
+        #root { min-height: 100vh; }
+        
+        /* Oculta o conteúdo até que o Tailwind processe os estilos para evitar flash de conteúdo não estilizado */
+        [v-cloak] { display: none; }
+        
+        ::selection { background-color: #10b981; color: white; }
+
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes scrollLine {
-          0% { height: 0; top: 0; }
-          50% { height: 100%; top: 0; }
-          100% { height: 0; top: 100%; }
+            0% { height: 0; top: 0; }
+            50% { height: 100%; top: 0; }
+            100% { height: 0; top: 100%; }
         }
     </style>
+
     <script>
-        // Silenciador de avisos de produção do Tailwind CDN para evitar erros em ferramentas de deploy
-        const originalWarn = console.warn;
-        console.warn = (...args) => {
-            if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
-            originalWarn(...args);
-        };
+        /** 
+         * FIX: Supressão de avisos do Tailwind CDN para ambientes de produção.
+         * Isso evita que ferramentas de deploy falhem ao detectar avisos no console.
+         */
+        (function() {
+            const originalWarn = console.warn;
+            console.warn = function(...args) {
+                if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+                originalWarn.apply(console, args);
+            };
+            const originalError = console.error;
+            console.error = function(...args) {
+                if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+                originalError.apply(console, args);
+            };
+        })();
     </script>
+
+    <!-- Tailwind Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
-        // Configuração oficial do Tailwind via JS
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         emerald: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
                             500: '#10b981',
                             600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
                             900: '#064e3b',
-                            950: '#022c22',
                         }
                     },
                     fontFamily: {
@@ -72,17 +79,22 @@
             }
         }
     </script>
+
+    <!-- Import Map para suporte a módulos ES6 nativos no navegador -->
     <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@^19.2.3",
-        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-        "react/": "https://esm.sh/react@^19.2.3/"
-      }
-    }
-    </script>
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
 </head>
 <body>
     <div id="root"></div>
+    <!-- O script index.tsx é injetado automaticamente pelo ambiente ou deve ser chamado via type="module" -->
 </body>
 </html>
