@@ -38,8 +38,9 @@ export const PERSONAS: Persona[] = [
 ];
 
 export const IMAGES = {
-  hero_farm: "https://images.unsplash.com/photo-1594488651083-29118f0459c6?q=80&w=2832&auto=format&fit=crop",
-  analysis_placeholder: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-  mentor_portrait: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+  hero_farm: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478680313x884204212029605000/2.%20NDF.pptx%20%281%29.jpg?_gl=1*19ml9kh*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NDc4NjM2JGo2MCRsMCRoMA..",
+  analysis_placeholder: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478993354x215542235909228060/Sem%20Ti%CC%81tulo%20131.jpg?_gl=1*1p70y8i*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NDc4NjM2JGo2MCRsMCRoMA..",
+  // Imagem de um mentor executivo de alta qualidade (placeholder profissional)
+  mentor_portrait: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478337656x795680711954410200/mentor.JPG?_gl=1*1h2i1sb*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NDc4MzIwJGo0OCRsMCRoMA..",
   abstract_bg: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
 };

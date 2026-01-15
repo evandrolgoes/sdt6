@@ -34,10 +34,10 @@ const App: React.FC = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     
-    // Coletando dados de forma mais robusta via FormData
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
+    // Nota: O endpoint do Formspree deve ser o seu ID real
     const response = await fetch('https://formspree.io/f/mnjjnbjk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -71,27 +71,39 @@ const App: React.FC = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* 1. Nome */}
                   <div>
                     <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Nome</label>
                     <input required name="nome" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Seu nome completo" />
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-6">
+                    {/* 2. Whats */}
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">WhatsApp</label>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Whats</label>
                       <input required name="whatsapp" type="tel" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="(00) 00000-0000" />
                     </div>
+                    {/* 3. E-mail */}
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Email</label>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">E-mail</label>
                       <input required name="email" type="email" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="email@exemplo.com" />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Profissão atual</label>
-                    <input required name="profissao" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Sua ocupação atual" />
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* 4. Profissão atual */}
+                    <div>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Profissão atual</label>
+                      <input required name="profissao" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Sua ocupação" />
+                    </div>
+                    {/* 5. Empresa */}
+                    <div>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Empresa</label>
+                      <input required name="empresa" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Onde você trabalha" />
+                    </div>
                   </div>
 
+                  {/* 6. Em que momento você está hoje? */}
                   <div>
                     <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Em que momento você está hoje?</label>
                     <select required name="momento_atual" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light appearance-none text-white">
@@ -104,17 +116,10 @@ const App: React.FC = () => {
                     </select>
                   </div>
 
+                  {/* 7. Qual é seu principal objetivo com a Mentoria? */}
                   <div>
                     <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Qual é seu principal objetivo com a Mentoria?</label>
-                    <textarea required name="objetivo" rows={3} className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white resize-none" placeholder="Descreva brevemente sua meta..."></textarea>
-                  </div>
-
-                  <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Você já trabalha com produtores rurais atualmente?</label>
-                    <select required name="trabalha_com_produtores" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light appearance-none text-white">
-                      <option className="bg-[#173337]" value="Sim">Sim</option>
-                      <option className="bg-[#173337]" value="Não">Não</option>
-                    </select>
+                    <textarea required name="objetivo" rows={3} className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white resize-none" placeholder="Descreva sua meta principal..."></textarea>
                   </div>
 
                   <button type="submit" className="w-full bg-brand-green text-white py-5 text-[11px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all green-glow">
@@ -128,7 +133,7 @@ const App: React.FC = () => {
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00A86B" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
                 <h3 className="text-2xl font-normal mb-4">Aplicação Recebida.</h3>
-                <p className="text-white/40 text-sm leading-relaxed max-w-xs mx-auto">Sua solicitação foi enviada para análise. Entraremos em contato via WhatsApp em breve.</p>
+                <p className="text-white/40 text-sm leading-relaxed max-w-xs mx-auto">Sua solicitação foi enviada para análise estratégica. Entraremos em contato via Whats em breve.</p>
                 <button onClick={closeModal} className="mt-12 text-[10px] uppercase tracking-[0.3em] text-brand-green font-bold">Fechar</button>
               </div>
             )}
@@ -162,16 +167,11 @@ const App: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="relative min-h-screen flex flex-col items-start justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-[#173337]">
+      <header className="relative min-h-screen flex flex-col items-start justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 opacity-20">
-            <img src={IMAGES.hero_farm} className="w-full h-full object-cover animate-slow-pan grayscale" alt="Contexto Rural" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#173337] via-transparent to-[#173337]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#173337] via-transparent to-[#173337]" />
-          </div>
-          <div className="absolute inset-0 z-10 opacity-10 mask-fade-right mix-blend-screen pointer-events-none">
-             <img src={IMAGES.analysis_placeholder} className="w-full h-full object-cover scale-110 opacity-60" alt="Market Overlay" />
-          </div>
+          <img src={IMAGES.hero_farm} className="w-full h-full object-cover animate-slow-pan" alt="Contexto Rural" />
+          {/* Adicionando apenas uma camada escura muito sutil para garantir que o texto branco seja legível sobre a imagem clara */}
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
         <div className="relative z-20 max-w-4xl animate-slide-up">
@@ -181,15 +181,14 @@ const App: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tighter leading-[0.95] mb-12 text-shadow-sm reveal delay-100">
-            O espaço mais <br/>
-            <span className="font-italic italic text-brand-green">lucrativo</span> do Agro <br/>
-            tem um novo dono.
+            Mentoria Traders do Agro:<br/>
+            <span className="font-italic italic text-brand-green">A profissão do Futuro</span> <br/>
+            do Agronegócio.
           </h1>
           
           <div className="space-y-8 max-w-xl mb-14 reveal delay-200">
             <p className="text-xl text-white/60 leading-relaxed font-light border-l border-white/10 pl-8">
-              Formamos o <span className="font-semibold text-white">Trader do Agro</span>: o estrategista que protege margens e blinda o lucro da porteira para fora.
-            </p>
+              O Profissional Agro responsável por <span className="font-semibold text-white">Estratégias de mercado, Trading, Derivativos e Construção de margem financeira </span>ao lado do produtor. 
             <p className="text-lg text-brand-green font-italic italic pl-8">
               Não vendemos produtos. Blindamos resultados.
             </p>
@@ -201,7 +200,7 @@ const App: React.FC = () => {
             </button>
             <div className="flex items-center gap-4">
               <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></div>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-white/30 font-bold">INSCRIÇÕES LIMITADAS POR PERFIL</span>
+              <span className="text-[9px] uppercase tracking-[0.2em] text-white/30 font-bold">INSCRIÇÕES LIMITADAS</span>
             </div>
           </div>
         </div>
@@ -213,11 +212,25 @@ const App: React.FC = () => {
           <div className="reveal">
             <span className="text-[10px] uppercase tracking-[0.4em] text-brand-green font-black mb-10 block">FILOSOFIA DE MERCADO</span>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tighter text-white mb-12 leading-[1.05]">
-              O futuro do lucro não está apenas no solo, <br/> mas na <span className="text-brand-green font-semibold italic">gestão do risco</span>.
+              Produzir bem ja não é mais um desafio para o Produtor Brasileiro, <br/> o que ele precisa é <span className="text-brand-green font-semibold italic">ter um estrategista de confiança na hora de vender.</span>
             </h2>
             <div className="space-y-10 text-white/50 text-xl font-light leading-relaxed pr-10">
-              <p>O produtor brasileiro é o melhor do mundo em produtividade. Mas a maioria entrega o esforço de um ano inteiro em decisões emocionais de venda.</p>
-              <p>O Trader do Agro é quem assume o controle. Ele domina a <span className="font-semibold text-white">formação do preço</span>, os derivativos e o timing. Ele é o seguro de vida da margem do produtor.</p>
+              <p>O Trader do Agro nasce para ocupar esse vazio.</p>
+<p>
+Ele não tenta adivinhar o mercado.
+Ele estrutura decisões.
+Não vende promessa.
+Ele protege margem.
+
+Domina a formação do preço, usa derivativos como ferramenta
+e entende que o verdadeiro ganho está no controle do risco e do timing.
+
+O Trader do Agro é o guardião da margem do produtor.
+É quem transforma produção em resultado financeiro previsível.
+
+Produtividade é obrigação.
+Estratégia é o que mantém o produtor no jogo. </p>
+              <p>Alguém que entrega Estratégia de verdade e não que só "suga" o bolso dele. <span className="font-semibold text-white">formação do preço</span></p>
             </div>
           </div>
           <div className="reveal delay-300 relative">
