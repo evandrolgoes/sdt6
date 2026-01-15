@@ -5,16 +5,19 @@ interface SectionProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  dark?: boolean;
+  gradientFrom?: string;
+  gradientTo?: string;
 }
 
-export const Section: React.FC<SectionProps> = ({ children, className = "", id, dark = false }) => {
+export const Section: React.FC<SectionProps> = ({ children, className = "", id, gradientFrom, gradientTo }) => {
+  const gradientClass = gradientFrom && gradientTo ? `bg-gradient-to-b from-[${gradientFrom}] to-[${gradientTo}]` : '';
+  
   return (
     <section 
       id={id} 
-      className={`py-20 px-6 md:py-32 md:px-12 lg:px-24 transition-colors duration-500 ${dark ? 'bg-[#050705]' : 'bg-[#0a0d0a]'} ${className}`}
+      className={`py-16 px-6 md:py-24 md:px-12 lg:px-24 relative overflow-hidden ${gradientClass} ${className}`}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto relative z-10">
         {children}
       </div>
     </section>

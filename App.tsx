@@ -33,11 +33,9 @@ const App: React.FC = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    // Nota: O endpoint do Formspree deve ser o seu ID real
     const response = await fetch('https://formspree.io/f/mnjjnbjk', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -47,17 +45,19 @@ const App: React.FC = () => {
     if (response.ok) setIsSubmitted(true);
   };
 
+  const labelClasses = "text-[20px] font-bebas tracking-[0.4em] text-brand-green uppercase mb-8 block";
+
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-brand-green selection:text-white font-light overflow-x-hidden">
+    <div className="min-h-screen bg-brand-deep text-white selection:bg-brand-green selection:text-white font-light overflow-x-hidden">
       
       {/* Modal de Aplicação */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 animate-fadeIn">
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={closeModal}></div>
-          <div className="relative w-full max-w-xl bg-[#173337] border border-white/10 p-8 md:p-12 rounded-sm shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto">
+          <div className="absolute inset-0 bg-black/95 backdrop-blur-md" onClick={closeModal}></div>
+          <div className="relative w-full max-w-xl bg-brand-dark border border-white/10 p-8 md:p-12 rounded-sm shadow-2xl animate-slide-up max-h-[90vh] overflow-y-auto">
             <button 
               onClick={closeModal}
-              className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors z-10"
+              className="absolute top-6 right-6 text-brand-gray hover:text-white transition-colors z-10"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
@@ -65,64 +65,34 @@ const App: React.FC = () => {
             {!isSubmitted ? (
               <>
                 <div className="mb-10">
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-brand-green font-black mb-4 block">Processo Seletivo</span>
-                  <h3 className="text-3xl font-normal tracking-tighter text-white">Solicite sua vaga na mesa.</h3>
-                  <p className="text-white/40 text-sm mt-4 font-light italic">Preencha os dados abaixo para análise de perfil estratégico.</p>
+                  <span className={labelClasses}>Processo Seletivo</span>
+                  <h3 className="text-3xl font-normal tracking-tighter text-white">Solicite acesso à mesa.</h3>
+                  <p className="text-brand-gray text-sm mt-4 font-light italic">Seus dados serão submetidos à análise estratégica.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* 1. Nome */}
                   <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Nome</label>
-                    <input required name="nome" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Seu nome completo" />
+                    <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">Nome Completo</label>
+                    <input required name="nome" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" />
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-6">
-                    {/* 2. Whats */}
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Whats</label>
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">WhatsApp</label>
                       <input required name="whatsapp" type="tel" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="(00) 00000-0000" />
                     </div>
-                    {/* 3. E-mail */}
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">E-mail</label>
-                      <input required name="email" type="email" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="email@exemplo.com" />
+                      <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">E-mail</label>
+                      <input required name="email" type="email" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {/* 4. Profissão atual */}
-                    <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Profissão atual</label>
-                      <input required name="profissao" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Sua ocupação" />
-                    </div>
-                    {/* 5. Empresa */}
-                    <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Empresa</label>
-                      <input required name="empresa" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="Onde você trabalha" />
-                    </div>
-                  </div>
-
-                  {/* 6. Em que momento você está hoje? */}
                   <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Em que momento você está hoje?</label>
-                    <select required name="momento_atual" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light appearance-none text-white">
-                      <option value="" disabled selected className="text-white/20">Selecione uma opção...</option>
-                      <option className="bg-[#173337]" value="Quero fazer uma transição de carreira para o Agro">Quero fazer uma transição de carreira para o Agro</option>
-                      <option className="bg-[#173337]" value="Já trabalho no Agro e quero me diferenciar e crescer">Já trabalho no Agro e quero me diferenciar e crescer</option>
-                      <option className="bg-[#173337]" value="Quero empreender e criar minha própria atuação no Agro">Quero empreender e criar minha própria atuação no Agro</option>
-                      <option className="bg-[#173337]" value="Sou produtor e quero melhorar minha tomada de decisão">Sou produtor e quero melhorar minha tomada de decisão</option>
-                      <option className="bg-[#173337]" value="Ainda estou entendendo se isso é pra mim">Ainda estou entendendo se isso é pra mim</option>
-                    </select>
+                    <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">Qual é seu principal objetivo?</label>
+                    <textarea required name="objetivo" rows={3} className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white resize-none" placeholder="O que você busca alcançar?"></textarea>
                   </div>
 
-                  {/* 7. Qual é seu principal objetivo com a Mentoria? */}
-                  <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2 block font-bold">Qual é seu principal objetivo com a Mentoria?</label>
-                    <textarea required name="objetivo" rows={3} className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white resize-none" placeholder="Descreva sua meta principal..."></textarea>
-                  </div>
-
-                  <button type="submit" className="w-full bg-brand-green text-white py-5 text-[11px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all green-glow">
+                  <button type="submit" className="w-full bg-brand-green text-white py-5 text-[11px] font-black uppercase tracking-[0.4em] hover:brightness-110 transition-all green-glow">
                     ENVIAR APLICAÇÃO
                   </button>
                 </form>
@@ -130,251 +100,260 @@ const App: React.FC = () => {
             ) : (
               <div className="py-20 text-center animate-fadeIn">
                 <div className="w-16 h-16 border border-brand-green rounded-full flex items-center justify-center mx-auto mb-8">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00A86B" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#008000" strokeWidth="2"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
-                <h3 className="text-2xl font-normal mb-4">Aplicação Recebida.</h3>
-                <p className="text-white/40 text-sm leading-relaxed max-w-xs mx-auto">Sua solicitação foi enviada para análise estratégica. Entraremos em contato via Whats em breve.</p>
-                <button onClick={closeModal} className="mt-12 text-[10px] uppercase tracking-[0.3em] text-brand-green font-bold">Fechar</button>
+                <h3 className="text-2xl font-normal mb-4">Aplicação em análise.</h3>
+                <p className="text-brand-gray text-sm leading-relaxed max-w-xs mx-auto">Em breve, nossa equipe entrará em contato via WhatsApp.</p>
+                <button onClick={closeModal} className="mt-12 text-[10px] uppercase tracking-[0.3em] text-brand-green font-bold">Voltar</button>
               </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Scroll Vertical do PDF */}
-      <div className="hidden lg:flex sidebar-scroll">
-        <span className="text-[8px] uppercase tracking-[0.6em] rotate-90 mb-10 text-white/40">SCROLL</span>
-        <div className="w-px h-32 bg-white/10 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1/2 bg-brand-green animate-pulse"></div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-8 md:px-16 py-8 flex justify-between items-center bg-transparent backdrop-blur-sm">
+      {/* Navigation - Transparente para deixar a imagem subir até o topo */}
+      <nav className="fixed top-0 w-full z-50 px-8 md:px-16 py-8 flex justify-between items-center bg-transparent">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-black tracking-tighter uppercase text-white shadow-sm">TRADERS <span className="font-extralight opacity-50">AGRO</span></span>
+          <span className="text-sm font-black tracking-[0.2em] uppercase text-white">TRADERS <span className="font-extralight opacity-50">do AGRO</span></span>
         </div>
         
-        <div className="hidden lg:flex gap-12 text-[9px] uppercase tracking-[0.3em] text-white/40 font-bold">
-          <a href="#conceito" className="hover:text-white transition-colors">O CONCEITO</a>
-          <a href="#metodo" className="hover:text-white transition-colors">O MÉTODO</a>
-          <a href="#mentor" className="hover:text-white transition-colors">O MENTOR</a>
+        <div className="hidden lg:flex gap-12 text-[10px] uppercase tracking-[0.3em] text-brand-gray/60 font-bold">
+          <a href="#conceito" className="hover:text-white transition-colors">CONCEITO</a>
+          <a href="#metodo" className="hover:text-white transition-colors">MÉTODO</a>
+          <a href="#software" className="hover:text-white transition-colors">SDT POSITION</a>
+          <a href="#mentor" className="hover:text-white transition-colors">MENTOR</a>
         </div>
 
-        <button onClick={openModal} className="text-[9px] font-bold uppercase tracking-[0.2em] px-7 py-2.5 bg-black/20 border border-white/10 text-white/90 hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-500">
-          APLICAR AGORA
+        <button onClick={openModal} className="text-[9px] font-bold uppercase tracking-[0.2em] px-7 py-2.5 bg-brand-green border border-brand-green text-white hover:brightness-125 transition-all duration-700 shadow-[0_0_20px_rgba(0,128,0,0.4)]">
+          APLICAR
         </button>
       </nav>
 
-      {/* Hero Section */}
-      <header className="relative min-h-screen flex flex-col items-start justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-black">
+      {/* Hero Section - Atingindo o topo total */}
+      <header className="relative min-h-screen flex flex-col items-start justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-brand-deep">
         <div className="absolute inset-0 z-0">
-          <img src={IMAGES.hero_farm} className="w-full h-full object-cover animate-slow-pan" alt="Contexto Rural" />
-          {/* Adicionando apenas uma camada escura muito sutil para garantir que o texto branco seja legível sobre a imagem clara */}
-          <div className="absolute inset-0 bg-black/30" />
+          <img src={IMAGES.hero_farm} className="w-full h-full object-cover opacity-100 animate-slow-pan grayscale-[0.2]" alt="Safra" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-deep via-brand-deep/60 to-transparent" />
         </div>
 
-        <div className="relative z-20 max-w-4xl animate-slide-up">
+        <div className="relative z-20 max-w-5xl animate-slide-up pt-20">
           <div className="flex items-center gap-4 mb-10 reveal">
-            <div className="w-10 h-px bg-brand-green"></div>
-            <span className="text-[10px] uppercase tracking-[0.4em] text-brand-green font-black">FORMAÇÃO ESTRATÉGICA EXCLUSIVA</span>
+            <div className="w-8 h-px bg-brand-green"></div>
+          
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tighter leading-[0.95] mb-12 text-shadow-sm reveal delay-100">
-            Mentoria Traders do Agro:<br/>
-            <span className="font-italic italic text-brand-green">A profissão do Futuro</span> <br/>
-            do Agronegócio.
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-normal tracking-tighter leading-[0.9] mb-12 reveal delay-100 text-shadow-premium">
+            Mentoria Traders do Agro:<br/> 
+            <span className="italic font-light text-brand-gray">A profissão do Futuro do Agronegócio</span> <span className="font-semibold text-brand-green italic"></span>
           </h1>
           
-          <div className="space-y-8 max-w-xl mb-14 reveal delay-200">
-            <p className="text-xl text-white/60 leading-relaxed font-light border-l border-white/10 pl-8">
-              O Profissional Agro responsável por <span className="font-semibold text-white">Estratégias de mercado, Trading, Derivativos e Construção de margem financeira </span>ao lado do produtor. 
-            <p className="text-lg text-brand-green font-italic italic pl-8">
-              Não vendemos produtos. Blindamos resultados.
+          <div className="max-w-2xl mb-14 reveal delay-200">
+            <p className="text-xl md:text-2xl text-brand-gray leading-relaxed font-extralight border-l-2 border-brand-green pl-10">
+              Formamos estrategistas Agro que dominam <br />
+              <span className="text-white font-normal underline decoration-brand-green underline-offset-8">Trading, Derivativos, Políticas de Hedge e Margem Financeira</span><br />
+              Seja o profissional do Agro mais Procurado dos próximos anos.
             </p>
           </div>
           
-          <div className="flex flex-col md:flex-row gap-10 items-center reveal delay-300 pl-8">
-            <button onClick={openModal} className="w-full md:w-auto bg-brand-green text-white px-12 py-6 text-[11px] font-black uppercase tracking-[0.3em] hover:brightness-110 transition-all duration-300 green-glow">
-              GARANTIR MINHA VAGA
+          <div className="flex flex-col md:flex-row gap-12 items-center reveal delay-300 pl-10">
+            <button onClick={openModal} className="w-full md:w-auto bg-brand-green text-white px-14 py-6 text-[11px] font-black uppercase tracking-[0.4em] hover:brightness-125 transition-all duration-500 shadow-[0_0_30px_rgba(0,128,0,0.3)]">
+              QUERO UMA VAGA
             </button>
-            <div className="flex items-center gap-4">
-              <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse"></div>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-white/30 font-bold">INSCRIÇÕES LIMITADAS</span>
-            </div>
+            <span className="text-[12px] uppercase tracking-[0.3em] text-brand-gray/50 font-bold italic">APENAS 50 VAGAS</span>
           </div>
         </div>
       </header>
 
-      {/* Filosofia Section */}
-      <Section id="conceito" className="!bg-gradient-to-b !from-[#173337] !to-black !py-48">
-        <div className="grid lg:grid-cols-2 gap-32 items-center">
-          <div className="reveal">
-            <span className="text-[10px] uppercase tracking-[0.4em] text-brand-green font-black mb-10 block">FILOSOFIA DE MERCADO</span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tighter text-white mb-12 leading-[1.05]">
-              Produzir bem ja não é mais um desafio para o Produtor Brasileiro, <br/> o que ele precisa é <span className="text-brand-green font-semibold italic">ter um estrategista de confiança na hora de vender.</span>
+      {/* Filosofia Section - Deep para Dark */}
+      <Section id="conceito" className="!bg-gradient-to-b from-[#050705] to-[#173337]">
+        <div className="max-w-5xl reveal">
+          <span className={labelClasses}>FILOSOFIA DO TRADER DO AGRO</span>
+          <div className="space-y-8 mb-16">
+            <h2 className="text-4xl md:text-6xl font-normal tracking-tighter text-white leading-[1.1]">
+              Produzir bem ja não é mais um desafio para o Produtor.
             </h2>
-            <div className="space-y-10 text-white/50 text-xl font-light leading-relaxed pr-10">
-              <p>O Trader do Agro nasce para ocupar esse vazio.</p>
-<p>
-Ele não tenta adivinhar o mercado.
-Ele estrutura decisões.
-Não vende promessa.
-Ele protege margem.
-
-Domina a formação do preço, usa derivativos como ferramenta
-e entende que o verdadeiro ganho está no controle do risco e do timing.
-
-O Trader do Agro é o guardião da margem do produtor.
-É quem transforma produção em resultado financeiro previsível.
-
-Produtividade é obrigação.
-Estratégia é o que mantém o produtor no jogo. </p>
-              <p>Alguém que entrega Estratégia de verdade e não que só "suga" o bolso dele. <span className="font-semibold text-white">formação do preço</span></p>
-            </div>
+            <h2 className="text-2xl md:text-4xl font-light italic tracking-tight text-brand-green opacity-90 leading-[1.1]">
+              Ele precisa é de um estrategista com conhecimento e de confiança o produtor no jogo.
+            </h2>
           </div>
-          <div className="reveal delay-300 relative">
-            <div className="absolute inset-0 bg-brand-green/5 blur-[100px] rounded-full animate-pulse"></div>
-            <div className="relative border border-white/5 p-4 bg-white/[0.02] backdrop-blur-sm overflow-hidden rounded-md group">
-               <img src={IMAGES.analysis_placeholder} className="w-full h-auto grayscale brightness-50 opacity-40 group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100 transition-all duration-1000" alt="Análise Financeira" />
-            </div>
-          </div>
+          
+          <p className="text-brand-gray text-xl font-light leading-relaxed mb-8">
+            O Traders do Agro nasceu para ocupar o lugar de confiança na mesa de decisão do Produtor. <br /><br />
+            Ele estrutura decisões <br />
+            Cria estratégias de Venda <br />
+            Melhora a Margem do produtor <br />
+            Domina o Mercado e o uso de Derivativos <br />
+            Sabe tomar crédito em Dólar e gerenciar os Riscos da Variação Cambial <br />
+            <strong className="text-brand-green font-bold">Aumenta em pelo menos 5% a margem financeira das fazendas.</strong> <br /><br />
+          </p>
         </div>
       </Section>
 
-      {/* Triade de Valor */}
-      <Section className="!bg-black border-y border-white/5 !py-40">
-        <div className="grid md:grid-cols-3 gap-24">
-          <div className="space-y-8 reveal">
-            <h4 className="text-brand-green font-black text-[10px] uppercase tracking-[0.4em]">O QUE SOMOS</h4>
-            <div className="h-px w-10 bg-brand-green/30"></div>
-            <p className="text-white/40 text-base leading-relaxed font-light">Uma formação de elite em gestão de risco real. Focamos no prêmio, na base e em estratégias estruturadas que geram dinheiro no bolso do produtor.</p>
-          </div>
-          <div className="space-y-8 reveal delay-200">
-            <h4 className="text-brand-green font-black text-[10px] uppercase tracking-[0.4em]">O QUE NÃO SOMOS</h4>
-            <div className="h-px w-10 bg-brand-green/30"></div>
-            <p className="text-white/40 text-base leading-relaxed font-light">Não ensinamos apostas. Não é day trade, não é mágica de tela. É a aplicação pragmática de derivativos financeiros ao produto físico agrícola.</p>
-          </div>
-          <div className="space-y-8 reveal delay-400">
-            <h4 className="text-brand-green font-black text-[10px] uppercase tracking-[0.4em]">SUA TRANSFORMAÇÃO</h4>
-            <div className="h-px w-10 bg-brand-green/30"></div>
-            <p className="text-white/40 text-base leading-relaxed font-light">Você deixa de ser um 'tirador de pedidos' para se tornar o Conselheiro Estratégico indispensável na mesa do produtor.</p>
-          </div>
-        </div>
-      </Section>
 
-      {/* Para quem é a Mentoria */}
-      <Section id="para-quem" className="!bg-gradient-to-b !from-black !to-[#173337] !py-48">
-        <div className="text-center mb-24 reveal">
-           <span className="text-brand-green text-[10px] font-black uppercase tracking-[0.6em] mb-6 block">PÚBLICO-ALVO</span>
-           <h2 className="text-4xl md:text-6xl font-normal tracking-tighter text-white uppercase">Para quem é a Mentoria?</h2>
+      {/* Método Section - Deep para Dark */}
+      <Section id="metodo" className="!bg-brand-deep !py-24">
+        <div className="mb-20 reveal">
+           <span className={labelClasses}>O QUE O TRADER APRENDE NA MENTORIA</span>
+           <h2 className="text-5xl md:text-7xl font-light tracking-tighter text-white uppercase">14 Níveis de Domínio</h2>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
-          {PERSONAS.map((p, i) => (
-            <div key={i} className="group p-8 bg-white/[0.03] border border-white/5 hover:border-brand-green/40 transition-all duration-700 rounded-sm">
-               <div className="w-8 h-8 mb-8 border border-brand-green/30 flex items-center justify-center group-hover:bg-brand-green transition-all duration-500">
-                  <span className="text-[10px] font-bold text-brand-green group-hover:text-white transition-colors">0{i+1}</span>
-               </div>
-               <h4 className="text-xl font-bold mb-6 text-white group-hover:text-brand-green transition-colors">{p.role}</h4>
-               <p className="text-white/40 text-sm leading-relaxed font-light group-hover:text-white/60 transition-colors">{p.context}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Meta Final */}
-      <div className="py-32 text-center bg-[#173337] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <img src={IMAGES.hero_farm} className="w-full h-full object-cover grayscale opacity-20" />
-          </div>
-          <div className="relative z-10">
-            <span className="text-[10px] uppercase tracking-[0.6em] text-brand-green font-black block mb-14 reveal">A META FINAL</span>
-            <div className="reveal delay-100">
-              <h2 className="text-5xl md:text-8xl font-light italic leading-none opacity-40 tracking-tighter">Extrair o máximo de</h2>
-              <h2 className="text-5xl md:text-8xl font-black leading-none mt-4 text-brand-green italic tracking-tighter">valor da safra.</h2>
-            </div>
-            <p className="text-white/30 text-[11px] font-bold mt-16 max-w-2xl mx-auto uppercase tracking-[0.5em] leading-loose reveal delay-200">
-              Foco em adicionar de 5% a 8% de margem extra <br/> anualmente através de proteção e arbitragem.
-            </p>
-          </div>
-      </div>
-
-      {/* Mapa do Conhecimento */}
-      <Section id="metodo" className="!bg-gradient-to-b !from-[#173337] !to-black !py-48">
-        <div className="text-center mb-32 reveal">
-           <span className="text-brand-green text-[10px] font-black uppercase tracking-[0.6em] mb-6 block">O MAPA DO CONHECIMENTO</span>
-           <h2 className="text-5xl md:text-7xl font-normal tracking-tighter text-white uppercase">14 Níveis de Excelência</h2>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 reveal">
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
           {MODULES.map((m, i) => (
-            <div key={i} className="group transition-all duration-700 hover:translate-x-2">
-              <span className="text-brand-green/30 text-[11px] font-black group-hover:text-brand-green transition-colors">{m.title.split('. ')[0]}</span>
-              <h5 className="text-xl font-bold text-white mt-4 mb-4 group-hover:text-brand-green transition-colors">{m.title.split('. ')[1]}</h5>
-              <div className="w-6 h-px bg-white/10 mb-5 group-hover:w-full transition-all duration-700"></div>
-              <p className="text-white/40 text-sm font-light leading-relaxed group-hover:text-white/60 transition-colors">{m.description}</p>
+            <div key={i} className="group bg-white/5 border border-white/10 p-8 rounded-sm hover:border-brand-green transition-all duration-500 hover:bg-white/[0.08]">
+              <div className="flex justify-between items-start mb-6">
+                <span className="text-brand-green text-[12px] font-black tracking-widest font-mono">{m.title.split('. ')[0]}</span>
+                <div className="w-6 h-px bg-white/10 group-hover:w-12 group-hover:bg-brand-green transition-all"></div>
+              </div>
+              <h5 className="text-xl font-medium text-white mb-4 leading-tight">{m.title.split('. ')[1]}</h5>
+              <p className="text-brand-gray/60 text-sm font-light leading-relaxed group-hover:text-brand-gray transition-colors">{m.description}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Liderança */}
-      <Section id="mentor" className="!bg-gradient-to-b !from-black !to-[#173337] !py-48 overflow-hidden">
-        <div className="grid lg:grid-cols-12 gap-32 items-center">
-          <div className="lg:col-span-5 reveal">
-            <div className="relative aspect-[3/4] grayscale hover:grayscale-0 transition-all duration-1000 border border-white/10 rounded-sm overflow-hidden shadow-2xl">
-              <img src={IMAGES.mentor_portrait} className="w-full h-full object-cover" alt="Evandro Góes" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+      {/* SDT Position Section - Deep para Dark */}
+      <Section id="software" className="!bg-gradient-to-b from-[#050705] to-[#173337]">
+        <div className="grid lg:grid-cols-2 gap-24 items-center">
+          <div className="reveal">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="px-3 py-1 bg-brand-green text-white text-[16px] font-bebas tracking-[0.2em] uppercase rounded-sm">O Trader do Agro tem acesso ao melhor sistema do Brasil de gerenciamento de Riscos</span>
+              <div className="w-12 h-px bg-white/10"></div>
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-normal tracking-tighter text-white mb-10 leading-[0.95]">
+              SDT Position: <br />
+              <span className="text-brand-green italic">O Centro de Comando</span> <br />
+              do Estrategista.
+            </h2>
+            
+            <p className="text-brand-gray text-lg font-light leading-relaxed mb-12 max-w-lg">
+              Tenha em mãos o melhor sistema de gerenciamento de hedge do Brasil. 
+              A tecnologia que traduz a complexidade de Chicago para o lucro real na sua fazenda.
+            </p>
+            
+            <div className="space-y-8">
+              <div className="flex gap-6 items-start">
+                <div className="w-10 h-10 flex-shrink-0 border border-brand-green bg-brand-green/10 flex items-center justify-center rounded-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold tracking-widest text-white uppercase mb-2">Política & Estratégia</h4>
+                  <p className="text-brand-gray text-sm font-light leading-relaxed">Construa e acompanhe sua política de hedge com acompanhamento visual de metas e travas.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-6 items-start">
+                <div className="w-10 h-10 flex-shrink-0 border border-brand-green bg-brand-green/10 flex items-center justify-center rounded-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold tracking-widest text-white uppercase mb-2">Gatilhos de Execução</h4>
+                  <p className="text-brand-gray text-sm font-light leading-relaxed">Defina pontos exatos de entrada e saída (compra/venda) para eliminar o viés emocional da operação.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-6 items-start">
+                <div className="w-10 h-10 flex-shrink-0 border border-brand-green bg-brand-green/10 flex items-center justify-center rounded-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold tracking-widest text-white uppercase mb-2">Ajuste MtM em Tempo Real</h4>
+                  <p className="text-brand-gray text-sm font-light leading-relaxed">Visualize seu Mark-to-Market em R$ instantaneamente, garantindo total transparência sobre sua posição financeira.</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="lg:col-span-7 reveal delay-300">
-            <span className="text-[10px] font-black tracking-[0.6em] text-brand-green uppercase mb-10 block">A LIDERANÇA</span>
-            <h3 className="text-6xl md:text-9xl font-normal text-white mb-16 tracking-tighter">Evandro Góes</h3>
-            <div className="space-y-10 text-white/50 text-xl font-light leading-relaxed mb-16 max-w-xl border-l border-brand-green/20 pl-10">
-               <p>Com passagens estratégicas por instituições financeiras e tradings, Evandro é hoje referência na aplicação pragmática de <span className="text-brand-green font-semibold italic">Hedge Agrícola</span>.</p>
-               <p>Unindo a frieza de Chicago com o "pé no barro" do produtor. O método não é teoria — é o que move milhões em volume físico todos os anos.</p>
-            </div>
-            <div className="flex gap-20 reveal delay-500">
-              <div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">12+</div>
-                <div className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black">ANOS DE MERCADO</div>
+          
+          <div className="reveal delay-400 relative">
+            <div className="absolute -inset-10 bg-brand-green/10 blur-[120px] rounded-full"></div>
+            <div className="relative group">
+              <div className="absolute -inset-px bg-brand-green rounded-sm opacity-20 group-hover:opacity-60 transition-opacity"></div>
+              <div className="relative bg-brand-deep border border-white/10 p-2 rounded-sm overflow-hidden">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-black/40">
+                  <div className="w-2 h-2 rounded-full bg-brand-green"></div>
+                  <span className="ml-4 text-[9px] text-brand-gray/40 tracking-widest uppercase font-black">sdt_position_terminal v4.0</span>
+                </div>
+                <img 
+                  src={IMAGES.sdt_position_preview} 
+                  className="w-full h-auto transition-all duration-1000 opacity-100" 
+                  alt="SDT Position Interface" 
+                />
               </div>
-              <div className="w-px h-16 bg-white/5 self-center"></div>
+            </div>
+            
+            {/* Elementos flutuantes de UI */}
+            <div className="absolute -top-10 -right-10 bg-brand-green border border-white/20 p-5 shadow-2xl hidden md:block">
+               <div className="text-[10px] text-white font-black mb-1 opacity-70">Ajustes Positivos Gerenciados</div>
+               <div className="text-xl font-mono text-white font-bold tracking-tighter">+ de R$ 8,0 Milhões</div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      
+
+      {/* Mentor Section - Dark para Deep */}
+      <Section id="mentor" className="!bg-gradient-to-b from-[#173337] to-[#050705]">
+      <span className={labelClasses}>A LIDERANÇA</span>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="reveal">
+            <div className="border-4 border-brand-green p-1 relative group overflow-hidden">
+              <img src={IMAGES.mentor_portrait} className="w-full h-auto grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" alt="Mentor" />
+            </div>
+          </div>
+          <div className="reveal delay-200">
+            <h3 className="text-5xl md:text-7xl font-normal text-white mb-12 tracking-tighter">Evandro Góes</h3>
+            <p className="text-brand-gray text-xl font-extralight leading-relaxed mb-12 border-l-4 border-brand-green pl-10">
+              Referência em <span className="text-brand-green italic font-bold">Hedge Agrícola</span>. <br />
+              Une a precisão técnica de Chicago com a realidade operacional da fazenda. Mais do que teoria: é execução de mercado real.
+            </p>
+            <div className="flex gap-16 pl-10">
               <div>
-                <div className="text-5xl font-black text-white mb-2 tracking-tighter">R$ 500M+</div>
-                <div className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black">SOB ESTRATÉGIA</div>
+                <div className="text-3xl font-bold text-white">12+</div>
+                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">ANOS DE MERCADO</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">R$ 500M+</div>
+                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">GESTÃO DE RISCO</div>
               </div>
             </div>
           </div>
         </div>
       </Section>
 
-      {/* Final CTA */}
-      <Section className="!py-64 !bg-black relative text-center overflow-hidden">
-         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-green/10 via-transparent to-transparent opacity-30"></div>
-         <div className="relative z-10 reveal">
-           <h2 className="text-5xl md:text-8xl lg:text-9xl font-normal tracking-tighter mb-16 leading-[0.9]">
-             Você está a uma decisão <br/> de se tornar <span className="text-brand-green italic font-semibold">indispensável.</span>
-           </h2>
-           <p className="text-white/30 text-[11px] font-bold mb-20 max-w-2xl mx-auto uppercase tracking-[0.6em] leading-loose">
-             A próxima turma é seleta e as vagas são preenchidas <br/> por ordem de maturidade profissional.
-           </p>
-           <button onClick={openModal} className="bg-brand-green text-white px-20 py-8 text-[12px] font-black uppercase tracking-[0.4em] hover:brightness-125 transition-all duration-500 green-glow">
-             SOLICITAR APLICAÇÃO DE VAGA
-           </button>
-         </div>
+      {/* Compromisso Estratégico - Deep para Dark */}
+      <Section className="!bg-gradient-to-b from-[#050705] to-[#173337] !py-32">
+        <div className="max-w-5xl mx-auto text-center reveal">
+          <span className={labelClasses}>COMPROMISSO ESTRATÉGICO</span>
+          <h2 className="text-4xl md:text-6xl font-normal tracking-tighter text-white mb-16 leading-[1.1] max-w-4xl mx-auto">
+            O Agronegócio <span className="text-brand-green italic font-light">não perdoa amadores.</span>
+          </h2>
+          
+          <div className="max-w-3xl mx-auto">
+            <p className="text-brand-gray text-2xl font-extralight leading-relaxed mb-12">
+              O tempo de contar com a sorte ou apenas com o clima acabou. No novo ciclo das commodities, a sobrevivência e a prosperidade pertencem a quem domina a proteção do capital.
+            </p>
+            <p className="text-white text-xl font-medium tracking-tight mb-16 italic border-t border-white/5 pt-12">
+              Este é o seu convite para sair da arquibancada e assumir o controle da sua mesa de operações.
+            </p>
+            
+            <button onClick={openModal} className="bg-brand-green text-white px-16 py-7 text-[12px] font-black uppercase tracking-[0.4em] hover:brightness-125 transition-all duration-500 shadow-[0_20px_40px_rgba(0,128,0,0.3)]">
+              SOLICITAR ACESSO À MENTORIA
+            </button>
+          </div>
+        </div>
       </Section>
 
       {/* Footer */}
-      <footer className="py-24 bg-black border-t border-white/5 px-8">
-        <div className="max-w-7xl mx-auto flex flex-col items-center gap-16 text-center">
-           <div className="flex items-center gap-3">
-              <div className="w-3 h-3 border border-brand-green rotate-45"></div>
-              <span className="text-xl font-black tracking-tighter uppercase text-white shadow-sm">TRADERS <span className="font-extralight opacity-40">AGRO</span></span>
+      <footer className="py-20 bg-black px-8 text-center">
+         <div className="flex flex-col items-center gap-6">
+           <span className="text-[10px] font-black tracking-[0.4em] uppercase text-brand-gray/40">TRADERS do AGRO © 2025</span>
+           <div className="flex gap-8 text-[9px] text-brand-green uppercase tracking-widest font-bold">
+             <span className="hover:text-white cursor-pointer transition-colors">Terms of access</span>
+             <span className="text-brand-gray/10">|</span>
+             <span className="hover:text-white cursor-pointer transition-colors">Strategic Risk Advisory</span>
            </div>
-           <p className="text-[9px] text-white/10 tracking-[0.3em] uppercase max-w-4xl leading-relaxed italic border-t border-white/5 pt-16">
-             AVISO: O CONTEÚDO DESTA MENTORIA É ESTRITAMENTE EDUCACIONAL E FOCADO EM GESTÃO DE RISCO COMERCIAL. NÃO CONSTITUI RECOMENDAÇÃO DE INVESTIMENTO FINANCEIRO.
-           </p>
-        </div>
+         </div>
       </footer>
     </div>
   );
