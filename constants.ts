@@ -1,5 +1,5 @@
 
-import { Module, Benefit, Persona } from './types';
+import { Module, Persona } from './types';
 
 export const MODULES: Module[] = [
   { title: "01. Onboarding", description: "Mentalidade, valores e os pilares da nova profissão." },
@@ -19,15 +19,27 @@ export const MODULES: Module[] = [
 ];
 
 export const PERSONAS: Persona[] = [
-  { role: "Bancários e Mercado Financeiro", context: "Especialistas que buscam profundidade no Agro real." },
-  { role: "Agrônomos e Consultores", context: "Profissionais que desejam sair da lógica de revenda de insumos." },
-  { role: "Produtores e Sucessores", context: "Líderes que buscam profissionalizar a gestão de risco da fazenda." },
-  { role: "Em Transição", context: "Quem busca liberdade e remuneração baseada em valor entregue." }
+  {
+    role: "Produtores Rurais",
+    context: "Que desejam parar de entregar a margem do ano em decisões emocionais e dominar a trava de preços."
+  },
+  {
+    role: "Consultores & Agrônomos",
+    context: "Que buscam elevar seu nível de entrega, agregando inteligência financeira real ao suporte técnico de campo."
+  },
+  {
+    role: "Profissionais de Tradings",
+    context: "Que operam o físico e precisam entender a fundo a dinâmica dos derivativos para otimizar originação."
+  },
+  {
+    role: "Investidores do Setor",
+    context: "Que buscam compreender os fundamentos reais que movem o preço da saca além da especulação de tela."
+  }
 ];
 
 export const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=2000",
-  market: "https://images.unsplash.com/photo-1611974714014-483712c3d52d?auto=format&fit=crop&q=80&w=2000",
-  field: "https://images.unsplash.com/photo-1495107336059-ed258c79ad0f?auto=format&fit=crop&q=80&w=2000",
-  mentor: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800"
+  hero_farm: "https://images.unsplash.com/photo-1594488651083-29118f0459c6?q=80&w=2832&auto=format&fit=crop",
+  analysis_placeholder: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+  mentor_portrait: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+  abstract_bg: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
 };
