@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traders do Agro | Mentoria Estratégica</title>
     
-    <!-- Pré-carregamento de fontes para evitar CLS (Cumulative Layout Shift) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Estilos críticos para renderização imediata (estética premium) */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #050705;
@@ -22,10 +20,7 @@
             scroll-behavior: smooth;
         }
         #root { min-height: 100vh; }
-        
-        /* Oculta o conteúdo até que o Tailwind processe os estilos para evitar flash de conteúdo não estilizado */
         [v-cloak] { display: none; }
-        
         ::selection { background-color: #10b981; color: white; }
 
         @keyframes fadeIn {
@@ -41,20 +36,22 @@
 
     <script>
         /** 
-         * FIX: Supressão de avisos do Tailwind CDN para ambientes de produção.
-         * Isso evita que ferramentas de deploy falhem ao detectar avisos no console.
+         * SILENCIADOR DE PRODUÇÃO (Tailwind CDN)
+         * Intercepta e ignora avisos específicos do cdn.tailwindcss.com
          */
         (function() {
-            const originalWarn = console.warn;
-            console.warn = function(...args) {
-                if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
-                originalWarn.apply(console, args);
-            };
-            const originalError = console.error;
-            console.error = function(...args) {
-                if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
-                originalError.apply(console, args);
-            };
+            const methods = ['warn', 'info', 'log', 'error'];
+            const pattern = /cdn\.tailwindcss\.com|Play CDN/i;
+            
+            methods.forEach(method => {
+                const original = console[method];
+                console[method] = function(...args) {
+                    if (args[0] && typeof args[0] === 'string' && pattern.test(args[0])) {
+                        return; // Ignora a mensagem
+                    }
+                    original.apply(console, args);
+                };
+            });
         })();
     </script>
 
@@ -80,7 +77,6 @@
         }
     </script>
 
-    <!-- Import Map para suporte a módulos ES6 nativos no navegador -->
     <script type="importmap">
 {
   "imports": {
@@ -95,6 +91,5 @@
 </head>
 <body>
     <div id="root"></div>
-    <!-- O script index.tsx é injetado automaticamente pelo ambiente ou deve ser chamado via type="module" -->
 </body>
 </html>
