@@ -6,6 +6,7 @@ import { MODULES, IMAGES, PERSONAS } from './constants';
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [currentSdtSlide, setCurrentSdtSlide] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,6 +24,14 @@ const App: React.FC = () => {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
+  }, []);
+
+  // Timer para o carrossel do SDT Position
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSdtSlide((prev) => (prev + 1) % IMAGES.sdt_carousel.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   const openModal = () => setIsModalOpen(true);
@@ -45,7 +54,7 @@ const App: React.FC = () => {
     if (response.ok) setIsSubmitted(true);
   };
 
-  const labelClasses = "text-[20px] font-bebas tracking-[0.4em] text-brand-green uppercase mb-8 block";
+  const labelClasses = "text-[18px] md:text-[20px] font-bebas tracking-[0.4em] text-brand-green uppercase mb-8 block";
   const inputLabelClasses = "text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold";
   const inputClasses = "w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white appearance-none";
 
@@ -299,21 +308,31 @@ const App: React.FC = () => {
             <div className="relative group">
               <div className="absolute -inset-px bg-brand-green rounded-sm opacity-20 group-hover:opacity-60 transition-opacity"></div>
               <div className="relative bg-brand-deep border border-white/10 p-2 rounded-sm overflow-hidden">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-black/40">
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-black/40 z-20 relative">
                   <div className="w-2 h-2 rounded-full bg-brand-green"></div>
                   <span className="ml-4 text-[9px] text-brand-gray/40 tracking-widest uppercase font-black">sdt_position_terminal v4.0</span>
+                  <div className="ml-auto flex gap-2">
+                    {IMAGES.sdt_carousel.map((_, i) => (
+                      <div key={i} className={`w-1 h-1 rounded-full transition-all duration-500 ${currentSdtSlide === i ? 'bg-brand-green scale-150' : 'bg-white/20'}`}></div>
+                    ))}
+                  </div>
                 </div>
-                <img 
-                  src={IMAGES.sdt_position_preview} 
-                  className="w-full h-auto transition-all duration-1000 opacity-100" 
-                  alt="SDT Position Interface" 
-                />
+                <div className="relative h-[200px] md:h-[400px] lg:h-[350px] overflow-hidden">
+                  {IMAGES.sdt_carousel.map((img, i) => (
+                    <img 
+                      key={i}
+                      src={img} 
+                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-200 ease-in-out ${currentSdtSlide === i ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`} 
+                      alt={`SDT Position Interface ${i + 1}`} 
+                    />
+                  ))}
+                </div>
               </div>
             </div>
             
             {/* Elementos flutuantes de UI */}
-            <div className="absolute -top-10 -right-10 bg-brand-green border border-white/20 p-5 shadow-2xl hidden md:block">
-               <div className="text-[10px] text-white font-black mb-1 opacity-70">Ajustes Positivos Gerenciados</div>
+            <div className="absolute -top-10 -right-10 bg-brand-green border border-white/20 p-5 shadow-2xl hidden md:block z-30">
+               <div className="text-[10px] text-white font-black mb-1 opacity-70 uppercase tracking-tighter">Ajustes Positivos Gerenciados</div>
                <div className="text-xl font-mono text-white font-bold tracking-tighter">+ de R$ 8,0 Milhões</div>
             </div>
           </div>
@@ -321,52 +340,47 @@ const App: React.FC = () => {
       </Section>
 
       {/* Mentor Section - Dark para Deep */}
-      <Section id="mentor" className="!bg-gradient-to-b from-[#173337] to-[#050705]">
-      <span className={labelClasses}>A LIDERANÇA</span>
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+      <Section id="mentor" className="!bg-gradient-to-b from-[#173337] to-[#050705] !py-12 md:!py-24">
+        <span className={labelClasses}>A LIDERANÇA</span>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="reveal">
-            <div className="border-4 border-brand-green p-1 relative group overflow-hidden">
+            <div className="border-4 border-brand-green p-1 relative group overflow-hidden max-w-sm mx-auto lg:max-w-none">
               <img src={IMAGES.mentor_portrait} className="w-full h-auto grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" alt="Mentor" />
             </div>
           </div>
           <div className="reveal delay-200">
-            <h3 className="text-5xl md:text-7xl font-normal text-white mb-12 tracking-tighter">Evandro Góes</h3>
-            <p className="text-brand-gray text-xl font-extralight leading-relaxed mb-12 border-l-4 border-brand-green pl-10">
-Uma das Maiores autoridades em <span className="text-brand-green italic font-bold">Hedge Agrícola no Brasil</span>. <br />
-+ de 12 anos de experiência em Hedge aplicado ao Produtor rural. <br />
-Atuou por 5 anos no Itaú BBA e por outros 5 anos na Louis Dreyfus Company como Trader de Commodities Agrícolas.<br />
-Construiu sua carreira unindo a precisão mercados internacionais (como Chicago) à realidade operacional da fazenda brasileira.<br />
-
-Mais do que teoria, atua na execução real de mercado, lado a lado com produtores, estruturando decisões que protegem caixa, reduzem risco e aumentam resultado financeiro.<br />
-
-Criador de um método próprio e exclusivo, validado na prática, que gera em média 5% de ganho adicional de margem financeira para as fazendas atendidas, por meio da integração entre derivativos, produto físico, políticas de hedge e gestão de fluxo de caixa.<br />
-
-Evandro não forma analistas.<br />
-Forma estrategistas do produtor rural — profissionais preparados para tomar decisões financeiras em um dos mercados mais complexos do mundo.            <br />
-            
-            
-            
+            <h3 className="text-5xl md:text-7xl font-normal text-white mb-8 md:mb-12 tracking-tighter">Evandro Góes</h3>
+            <p className="text-brand-gray text-lg md:text-xl font-extralight leading-relaxed mb-12 border-l-4 border-brand-green pl-6 md:pl-10">
+              Uma das Maiores autoridades em <span className="text-brand-green italic font-bold">Hedge Agrícola no Brasil</span>. <br /><br />
+              + de 12 anos de experiência em Hedge aplicado ao Produtor rural. <br />
+              Atuou por 5 anos no Itaú BBA e por outros 5 anos na Louis Dreyfus Company como Trader de Commodities Agrícolas.<br /><br />
+              Construiu sua carreira unindo a precisão de mercados internacionais (como Chicago) à realidade operacional da fazenda brasileira.<br /><br />
+              Mais do que teoria, atua na execução real de mercado, lado a lado com produtores, estruturando decisões que protegem caixa, reduzem risco e aumentam resultado financeiro.<br /><br />
+              Criador de um método próprio e exclusivo, validado na prática, que gera em média 5% de ganho adicional de margem financeira para as fazendas atendidas.<br /><br />
+              Evandro não forma analistas. Forma estrategistas do produtor rural — profissionais preparados para tomar decisões financeiras em um dos mercados mais complexos do mundo.
             </p>
-            <div className="flex gap-16 pl-10">
+            
+            {/* Estatísticas Responsivas */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-6 md:gap-x-12 pl-6 md:pl-10">
               <div>
-                <div className="text-3xl font-bold text-white">12+</div>
-                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">ANOS DE MERCADO</div>
+                <div className="text-2xl md:text-3xl font-bold text-white">12+</div>
+                <div className="text-[8px] md:text-[9px] text-brand-green uppercase tracking-[0.2em] font-black leading-tight">ANOS DE MERCADO</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white">+R$500 mm</div>
-                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">GESTÃO DE RISCO</div>
+                <div className="text-2xl md:text-3xl font-bold text-white">+R$500 mm</div>
+                <div className="text-[8px] md:text-[9px] text-brand-green uppercase tracking-[0.2em] font-black leading-tight">GESTÃO DE RISCO</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white">R$8 mm +</div>
-                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">DE AJUSTE POSITIVO EM DERIVATIVOS</div>
+                <div className="text-2xl md:text-3xl font-bold text-white">R$8 mm +</div>
+                <div className="text-[8px] md:text-[9px] text-brand-green uppercase tracking-[0.2em] font-black leading-tight">DE AJUSTE POSITIVO EM DERIVATIVOS</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white">+200 Mil</div>
-                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">CONTRATOS DE DERIVATIVOS NEGOCIADOS</div>
+                <div className="text-2xl md:text-3xl font-bold text-white">+200 Mil</div>
+                <div className="text-[8px] md:text-[9px] text-brand-green uppercase tracking-[0.2em] font-black leading-tight">CONTRATOS NEGOCIADOS</div>
               </div>
-                            <div>
-                <div className="text-3xl font-bold text-white">+3,5 mm</div>
-                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">DE SACAS DE SOJA SOB GESTÃO</div>
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-white">+3,5 mm</div>
+                <div className="text-[8px] md:text-[9px] text-brand-green uppercase tracking-[0.2em] font-black leading-tight">SACAS DE SOJA SOB GESTÃO</div>
               </div>
             </div>
           </div>

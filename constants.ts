@@ -40,7 +40,14 @@ export const PERSONAS: Persona[] = [
 export const IMAGES = {
   hero_farm: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478680313x884204212029605000/2.%20NDF.pptx%20%281%29.jpg",
   analysis_placeholder: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478993354x215542235909228060/Sem%20Ti%CC%81tulo%20131.jpg",
-  sdt_position_preview: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768504932907x252259700568347140/d039e244-c64a-4a9e-8335-e9b1606bae19.png?_gl=1*tg5950*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..", // Nova imagem de dashboard financeiro para garantir carregamento
+  sdt_position_preview: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527582763x514806205801388500/1.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..",
+  sdt_carousel: [
+    "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527582763x514806205801388500/1.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..",
+    "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527591157x304984797817830400/2.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..",
+    "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527599005x485382483897059100/3.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..",
+    "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527606044x147461032616644580/4.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA..",
+    "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768527613210x908580389053502100/5.jpg?_gl=1*1rg55if*_gcl_au*NDE5Njc3MzgwLjE3NjcwMzY1OTc.*_ga*ODA0NTQxODMzLjE3NjcwMzY1OTc.*_ga_BFPVR2DEE2*czE3Njg0NzM5ODQkbzEwJGcxJHQxNzY4NTA1MTI5JGo2MCRsMCRoMA.."
+  ],
   mentor_portrait: "https://d6c3507005dbeecfa21c1ba89e6db00d.cdn.bubble.io/f1768478337656x795680711954410200/mentor.JPG",
   abstract_bg: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1974&auto=format&fit=crop"
 };
