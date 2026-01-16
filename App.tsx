@@ -46,6 +46,8 @@ const App: React.FC = () => {
   };
 
   const labelClasses = "text-[20px] font-bebas tracking-[0.4em] text-brand-green uppercase mb-8 block";
+  const inputLabelClasses = "text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold";
+  const inputClasses = "w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white appearance-none";
 
   return (
     <div className="min-h-screen bg-brand-deep text-white selection:bg-brand-green selection:text-white font-light overflow-x-hidden">
@@ -72,24 +74,53 @@ const App: React.FC = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">Nome Completo</label>
-                    <input required name="nome" type="text" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" />
+                    <label className={inputLabelClasses}>Nome Completo</label>
+                    <input required name="nome" type="text" className={inputClasses} />
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">WhatsApp</label>
-                      <input required name="whatsapp" type="tel" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" placeholder="(00) 00000-0000" />
+                      <label className={inputLabelClasses}>WhatsApp</label>
+                      <input required name="whatsapp" type="tel" className={inputClasses} placeholder="(00) 00000-0000" />
                     </div>
                     <div>
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">E-mail</label>
-                      <input required name="email" type="email" className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white" />
+                      <label className={inputLabelClasses}>E-mail</label>
+                      <input required name="email" type="email" className={inputClasses} />
                     </div>
                   </div>
 
                   <div>
-                    <label className="text-[10px] uppercase tracking-[0.2em] text-brand-gray/50 mb-2 block font-bold">Qual é seu principal objetivo?</label>
-                    <textarea required name="objetivo" rows={3} className="w-full bg-black/40 border border-white/5 p-4 text-sm focus:border-brand-green outline-none transition-all font-light text-white resize-none" placeholder="O que você busca alcançar?"></textarea>
+                    <label className={inputLabelClasses}>Perfil</label>
+                    <select required name="perfil" className={inputClasses}>
+                      <option value="" disabled selected>Selecione seu perfil</option>
+                      <option value="Produtor Rural">Produtor Rural</option>
+                      <option value="Consultor / Agrônomo">Consultor / Agrônomo</option>
+                      <option value="Profissional de Trading">Profissional de Trading / Originação</option>
+                      <option value="Investidor">Investidor do Setor</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className={inputLabelClasses}>Trabalho e Função atual</label>
+                      <input required name="funcao" type="text" className={inputClasses} />
+                    </div>
+                    <div>
+                      <label className={inputLabelClasses}>Empresa atual</label>
+                      <input required name="empresa" type="text" className={inputClasses} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className={inputLabelClasses}>Qual o objetivo com a mentoria?</label>
+                    <select required name="objetivo_mentoria" className={inputClasses}>
+                      <option value="" disabled selected>Selecione seu objetivo principal</option>
+                      <option value="Dominar proteção de margem (Hedge)">Dominar proteção de margem (Hedge)</option>
+                      <option value="Transição de carreira para o mercado financeiro Agro">Transição de carreira para o mercado financeiro Agro</option>
+                      <option value="Oferecer consultoria estratégica para clientes">Oferecer consultoria estratégica para clientes</option>
+                      <option value="Entender formação de preços (Chicago/Câmbio)">Entender formação de preços (Chicago/Câmbio)</option>
+                    </select>
                   </div>
 
                   <button type="submit" className="w-full bg-brand-green text-white py-5 text-[11px] font-black uppercase tracking-[0.4em] hover:brightness-110 transition-all green-glow">
@@ -139,12 +170,11 @@ const App: React.FC = () => {
         <div className="relative z-20 max-w-5xl animate-slide-up pt-20">
           <div className="flex items-center gap-4 mb-10 reveal">
             <div className="w-8 h-px bg-brand-green"></div>
-          
           </div>
           
           <h1 className="text-4xl md:text-6xl lg:text-8xl font-normal tracking-tighter leading-[0.9] mb-12 reveal delay-100 text-shadow-premium">
             Mentoria Traders do Agro:<br/> 
-            <span className="italic font-light text-brand-gray">A profissão do Futuro do Agronegócio</span> <span className="font-semibold text-brand-green italic"></span>
+            <span className="italic font-light text-brand-gray text-2xl md:text-4xl lg:text-6xl block mt-4">A profissão do Futuro do Agronegócio</span>
           </h1>
           
           <div className="max-w-2xl mb-14 reveal delay-200">
@@ -173,18 +203,18 @@ const App: React.FC = () => {
               Produzir bem ja não é mais um desafio para o Produtor.
             </h2>
             <h2 className="text-2xl md:text-4xl font-light italic tracking-tight text-brand-green opacity-90 leading-[1.1]">
-              Ele precisa é de um estrategista com conhecimento e de confiança o produtor no jogo.
+              Ele precisa de um estrategista confiável ao seu lado, alguém preparado e que o ajuda a enfrentar os desafios do Mercado.
             </h2>
           </div>
           
           <p className="text-brand-gray text-xl font-light leading-relaxed mb-8">
-            O Traders do Agro nasceu para ocupar o lugar de confiança na mesa de decisão do Produtor. <br /><br />
-            Ele estrutura decisões <br />
-            Cria estratégias de Venda <br />
-            Melhora a Margem do produtor <br />
-            Domina o Mercado e o uso de Derivativos <br />
-            Sabe tomar crédito em Dólar e gerenciar os Riscos da Variação Cambial <br />
-            <strong className="text-brand-green font-bold">Aumenta em pelo menos 5% a margem financeira das fazendas.</strong> <br /><br />
+            O Trader do Agro nasce para ocupar esse lugar de confiança.<br /><br />
+            É o profissional que <strong>estrutura decisões</strong>, não apostas. <br />
+            Cria estratégias de venda, não achismos. <br />
+            Protege caixa e melhora a margem financeira da fazenda. <br />
+            Domina o mercado e o uso de derivativos como ferramenta de gestão <br />
+            É Espcialista em operações dolarizadas e sabe se proteger da Variação Cambial. <br />
+            Por Fim, aumenta em pelo menos 5% a Margem financeira da fazenda. <br />
           </p>
         </div>
       </Section>
@@ -290,8 +320,6 @@ const App: React.FC = () => {
         </div>
       </Section>
 
-      
-
       {/* Mentor Section - Dark para Deep */}
       <Section id="mentor" className="!bg-gradient-to-b from-[#173337] to-[#050705]">
       <span className={labelClasses}>A LIDERANÇA</span>
@@ -304,8 +332,20 @@ const App: React.FC = () => {
           <div className="reveal delay-200">
             <h3 className="text-5xl md:text-7xl font-normal text-white mb-12 tracking-tighter">Evandro Góes</h3>
             <p className="text-brand-gray text-xl font-extralight leading-relaxed mb-12 border-l-4 border-brand-green pl-10">
-              Referência em <span className="text-brand-green italic font-bold">Hedge Agrícola</span>. <br />
-              Une a precisão técnica de Chicago com a realidade operacional da fazenda. Mais do que teoria: é execução de mercado real.
+Uma das Maiores autoridades em <span className="text-brand-green italic font-bold">Hedge Agrícola no Brasil</span>. <br />
++ de 12 anos de experiência em Hedge aplicado ao Produtor rural. <br />
+Atuou por 5 anos no Itaú BBA e por outros 5 anos na Louis Dreyfus Company como Trader de Commodities Agrícolas.<br />
+Construiu sua carreira unindo a precisão mercados internacionais (como Chicago) à realidade operacional da fazenda brasileira.<br />
+
+Mais do que teoria, atua na execução real de mercado, lado a lado com produtores, estruturando decisões que protegem caixa, reduzem risco e aumentam resultado financeiro.<br />
+
+Criador de um método próprio e exclusivo, validado na prática, que gera em média 5% de ganho adicional de margem financeira para as fazendas atendidas, por meio da integração entre derivativos, produto físico, políticas de hedge e gestão de fluxo de caixa.<br />
+
+Evandro não forma analistas.<br />
+Forma estrategistas do produtor rural — profissionais preparados para tomar decisões financeiras em um dos mercados mais complexos do mundo.            <br />
+            
+            
+            
             </p>
             <div className="flex gap-16 pl-10">
               <div>
@@ -313,8 +353,20 @@ const App: React.FC = () => {
                 <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">ANOS DE MERCADO</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white">R$ 500M+</div>
+                <div className="text-3xl font-bold text-white">+R$500 mm</div>
                 <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">GESTÃO DE RISCO</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">R$8 mm +</div>
+                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">DE AJUSTE POSITIVO EM DERIVATIVOS</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">+200 Mil</div>
+                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">CONTRATOS DE DERIVATIVOS NEGOCIADOS</div>
+              </div>
+                            <div>
+                <div className="text-3xl font-bold text-white">+3,5 mm</div>
+                <div className="text-[9px] text-brand-green uppercase tracking-[0.2em] font-black">DE SACAS DE SOJA SOB GESTÃO</div>
               </div>
             </div>
           </div>
